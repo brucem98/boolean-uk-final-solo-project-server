@@ -12,10 +12,28 @@ generator client {
 }
 
 model Recipe {
-  id          Int    @id @default(autoincrement())
-  name        String @db.VarChar(255)
+  id          Int                    @id @default(autoincrement())
+  name        String                 @db.VarChar(255)
   totalTime   Int
   serving     Int
-  dishType    String @db.VarChar(255)
+  dishType    String                 @db.VarChar(255)
   instruction String
+  ingredients IngredientsOnRecipes[]
+}
+
+model Ingredient {
+  id            Int                    @id @default(autoincrement())
+  name          String                 @db.VarChar(255)
+  img           String
+  nutritionInfo String
+  recipes       IngredientsOnRecipes[]
+}
+
+model IngredientsOnRecipes {
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+
+  @@id([recipeId, ingredientId])
 }
