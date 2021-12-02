@@ -43,6 +43,6 @@ model Price {
   id            Int        @id @default(autoincrement())
   price         Float
   unitOfMeasure String     @db.VarChar(255)
-  Ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId  Int
 }
