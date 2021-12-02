@@ -27,7 +27,7 @@ model Ingredient {
   img           String
   nutritionInfo String
   recipes       IngredientsOnRecipes[]
-  price         Price?
+  prices        Price[]
 }
 
 model IngredientsOnRecipes {
@@ -43,6 +43,6 @@ model Price {
   id            Int        @id @default(autoincrement())
   price         Float
   unitOfMeasure String     @db.VarChar(255)
-  ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
-  ingredientId  Int        @unique
+  Ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId  Int
 }
