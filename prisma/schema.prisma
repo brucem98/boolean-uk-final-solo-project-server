@@ -18,16 +18,19 @@ model Recipe {
   serving     Int
   dishType    String                 @db.VarChar(255)
   instruction String
+  calories    Int
+  protein     Int
+  fat         Int
+  carbs       Int
   ingredients IngredientsOnRecipes[]
 }
 
 model Ingredient {
-  id            Int                    @id @default(autoincrement())
-  name          String                 @db.VarChar(255)
-  img           String
-  nutritionInfo String
-  recipes       IngredientsOnRecipes[]
-  prices        Price[]
+  id      Int                    @id @default(autoincrement())
+  name    String                 @db.VarChar(255)
+  img     String
+  recipes IngredientsOnRecipes[]
+  prices  Price[]
 }
 
 model IngredientsOnRecipes {
