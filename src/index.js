@@ -6,6 +6,10 @@ const morgan = require("morgan")
 
 const app = express()
 
+/*IMPORT ROUTERS */
+
+const priceRouter = require("./resources/price/router");
+
 /* SETUP MIDDLEWARE */
 
 app.disable("x-powered-by")
@@ -17,6 +21,7 @@ app.use(morgan("dev"))
 
 /* SETUP ROUTES */
 
+app.use("/prices", priceRouter)
 app.get("*", (req, res) => {
   res.json({ ok: true })
 })
