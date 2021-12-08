@@ -1,9 +1,11 @@
 const express = require("express");
 
-const { getPrice } = require("./controller")
+const { getIngredientPrice } = require("./controller")
 
 const router = express.Router();
 
-router.get("/", getPrice)
+router.get("/", getIngredientPrice)
+// router.get("/", getPrice)
+
 
 module.exports = router;
