@@ -19,9 +19,9 @@ model Recipe {
   dishType    String                 @db.VarChar(255)
   instruction String
   calories    Int
-  protein     Int
-  fat         Int
-  carbs       Int
+  protein     Float
+  fat         Float
+  carbs       Float
   ingredients IngredientsOnRecipes[]
 }
 
@@ -46,6 +46,7 @@ model Price {
   id            Int        @id @default(autoincrement())
   price         Float
   unitOfMeasure String     @db.VarChar(255)
+  createdAt     DateTime   @default(now())
   ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId  Int
 }
