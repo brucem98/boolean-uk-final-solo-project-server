@@ -23,8 +23,21 @@ const getAllRecipes = async (req, res) => {
     }
 };
 
-
+const getOneRecipeById = async(req, res) => {
+    const recipeId = parseInt(req.params.id)
+    try {
+        const selectedRecipe = await prisma.recipe.findUnique({
+            where: {
+                id: recipeId
+              }
+        })
+        res.json(selectedRecipe)
+    } catch (error) {
+        console.error("[ERROR] getOneRecipeById: ", { error });
+        res.json({ error });
+    }
+}
 
 module.exports = {
-    getAllRecipes
+    getAllRecipes, getOneRecipeById
 }
