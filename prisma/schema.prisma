@@ -22,6 +22,7 @@ model Recipe {
   protein     Float
   fat         Float
   carbs       Float
+  img         String
   ingredients IngredientsOnRecipes[]
 }
 

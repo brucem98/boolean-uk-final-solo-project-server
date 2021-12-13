@@ -9,6 +9,7 @@ const app = express()
 /*IMPORT ROUTERS */
 
 const priceRouter = require("./resources/price/router");
+const recipeRouter = require("./resources/recipe/router");
 
 /* SETUP MIDDLEWARE */
 
@@ -22,6 +23,8 @@ app.use(morgan("dev"))
 /* SETUP ROUTES */
 
 app.use("/prices", priceRouter)
+app.use("/recipes", recipeRouter)
+
 app.get("*", (req, res) => {
   res.json({ ok: true })
 })
