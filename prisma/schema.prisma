@@ -22,7 +22,7 @@ model Recipe {
   protein     Float
   fat         Float
   carbs       Float
-  img         String                 @default("hello")
+  img         String
   ingredients IngredientsOnRecipes[]
 }
 
