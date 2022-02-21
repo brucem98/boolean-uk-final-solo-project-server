@@ -33,7 +33,7 @@ const puppeteer = require('puppeteer');
 
 const getIngredientPrice = (async ()=> {console.log("inside getIngredientPrice")
 try {
-    const shoppingUrl = 'https://www.tesco.com/groceries/en-GB/search?query=tomato';
+    const shoppingUrl = `https://www.tesco.com/groceries/en-GB/search?query=${req.query.ingredient}`;
     const browser = await puppeteer.launch({headless: true});
     const page = await browser.newPage();
 
