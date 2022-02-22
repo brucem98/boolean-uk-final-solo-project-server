@@ -1,37 +1,9 @@
 const prisma = require("../../utils/database");
 const puppeteer = require('puppeteer');
 
-// const getPrice = (async () => {console.log("inside getPrice")
-//     try {
-//     const shoppingUrl = 'https://www.sainsburys.co.uk/shop/gb/groceries';
-//     const browser = await puppeteer.launch({headless: true});
-//     const page = await browser.newPage();
 
-//     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36');
-//     await page.goto(shoppingUrl);
-//     let data = await page.evaluate(()=> {
-//     console.log("string here")
-//         let results = []
-//         let items = document.querySelectorAll('.mNavigationPropositionTile-titleTableRow')
-//         console.log("items: ", items)
-//         items.forEach((item) => {
-//             results.push({
-//                 title: item.querySelector('.mNavigationPropositionTile-titleText').innerText
-//             })
-//         })
-//         return results
-//     })
-
-//     console.log("data: ", data)
-//     await browser.close();
-//   } catch (error) {
-//       console.error(error)
-//   }
-
-
-// })
-
-const getIngredientPrice = (async ()=> {console.log("inside getIngredientPrice")
+const getIngredientPrice = (async (req, res) => {console.log("inside getIngredientPrice")
+console.log("req.query", req.query.ingredient)
 try {
     const shoppingUrl = `https://www.tesco.com/groceries/en-GB/search?query=${req.query.ingredient}`;
     const browser = await puppeteer.launch({headless: true});
@@ -57,11 +29,15 @@ try {
         })
         return results
     })
-    // ('.tile-content')
+
     console.log("data: ", data)
+
+    res.json(data)
     await browser.close();
   } catch (error) {
-      console.error(error)
+      console.error({error})
+
+      res.status(500).json({ error: error.message })
   }
 
 
@@ -69,6 +45,9 @@ try {
 
 
 
+
 module.exports = {
     getIngredientPrice
 }
+
+

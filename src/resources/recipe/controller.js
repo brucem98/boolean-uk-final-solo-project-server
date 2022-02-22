@@ -11,7 +11,7 @@ const getAllRecipes = async (req, res) => {
                    ingredients: updatedIngredients}
         })
 
-        console.log({ cleanData})
+        console.log({ cleanData })
         
         console.log(data[0])
 
