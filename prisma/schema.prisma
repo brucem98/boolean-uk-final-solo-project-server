@@ -1,14 +1,11 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider          = "postgresql"
   url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-}
-
-generator client {
-  provider = "prisma-client-js"
 }
 
 model Recipe {
@@ -35,10 +32,10 @@ model Ingredient {
 }
 
 model IngredientsOnRecipes {
-  recipe       Recipe     @relation(fields: [recipeId], references: [id])
   recipeId     Int
-  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId Int
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
 
   @@id([recipeId, ingredientId])
 }
@@ -48,6 +45,6 @@ model Price {
   price         Float
   unitOfMeasure String     @db.VarChar(255)
   createdAt     DateTime   @default(now())
-  ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId  Int
+  ingredient    Ingredient @relation(fields: [ingredientId], references: [id])
 }
