@@ -6,7 +6,7 @@ const getIngredientPrice = (async (req, res) => {console.log("inside getIngredie
 console.log("req.query", req.query.ingredient)
 try {
     const shoppingUrl = `https://www.tesco.com/groceries/en-GB/search?query=${req.query.ingredient}`;
-    const browser = await puppeteer.launch({ 'args' : [
+    const browser = await puppeteer.launch({ args : [
         '--no-sandbox',
         '--disable-setuid-sandbox'
       ]});
