@@ -1,8 +1,6 @@
 const prisma = require("../../utils/database");
 const puppeteer = require('puppeteer');
 
-// Testing for bugfix
-
 
 const getIngredientPrice = (async (req, res) => {console.log("inside getIngredientPrice")
 console.log("req.query", req.query.ingredient)
