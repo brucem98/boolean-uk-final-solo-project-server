@@ -16,17 +16,19 @@ try {
     await page.goto(shoppingUrl, {waitUntil: 'networkidle2'});
     let data = await page.evaluate(()=> {
         let results = []
-        let items = document.querySelectorAll('.product-tile-wrapper')
+        // let items = document.querySelectorAll('.product-tile-wrapper')
+        let items = document.querySelectorAll('.product-details--wrapper');
         
         items.forEach((item) => {
-            const priceEl = item.querySelector('.value')
-            const unitOfMeasureEl = item.querySelector('.weight')
+            const priceEl = item.querySelector('.beans-price__text');
+            const unitOfMeasureEl = item.querySelector('.beans-price__subtext');
             if (priceEl){
             results.push({
-                product: item.querySelector('.ui__StyledLink-sc-18aswmp-0').innerText,
-                price: parseFloat(priceEl.innerText),
-                unitOfMeasure: unitOfMeasureEl.innerText.replace('/',''),
-                link: item.querySelector('.ui__StyledLink-sc-18aswmp-0').href
+                product: item.querySelector('.beans-link__text').innerText,
+                // price: parseFloat(priceEl.innerText),
+                price: parseFloat(priceEl.innerText.replace('£','')),
+                unitOfMeasure: unitOfMeasureEl.innerText,
+                link: item.querySelector('.beans-link__anchor').href
             })
         }
         })
@@ -36,6 +38,7 @@ try {
     console.log("data: ", data)
 
     res.json(data)
+    await page.screenshot({path: 'example.png'});
     await browser.close();
   } catch (error) {
       console.error({error})
