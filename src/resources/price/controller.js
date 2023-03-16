@@ -14,21 +14,18 @@ try {
     let data = await page.evaluate(()=> {
         let results = []
         // let items = document.querySelectorAll('.product-tile-wrapper')
-        let items = document.querySelectorAll('.product-details--wrapper');
+        let item = document.querySelector('.product-details--wrapper');
         
-        items.forEach((item) => {
-            const priceEl = item.querySelector('.beans-price__text');
-            const unitOfMeasureEl = item.querySelector('.beans-price__subtext');
+        const priceEl = item.querySelector('.beans-price__text');
+        const unitOfMeasureEl = item.querySelector('.beans-price__subtext');
             if (priceEl){
             results.push({
                 product: item.querySelector('.beans-link__text').innerText,
-                // price: parseFloat(priceEl.innerText),
                 price: parseFloat(priceEl.innerText.replace('£','')),
                 unitOfMeasure: unitOfMeasureEl.innerText,
                 link: item.querySelector('.beans-link__anchor').href
             })
         }
-        })
         return results
     })
 
